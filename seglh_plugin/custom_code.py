@@ -15,7 +15,7 @@ from multiqc.utils import report, util_functions, config
 log = logging.getLogger('multiqc')
 
 # Save this plugin's version number (defined in setup.py) to the MultiQC config
-config.example_plugin_version = get_distribution("multiqc_example_plugin").version
+config.seglh_plugin_version = get_distribution("seglh_plugin").version
 
 
 # Add default config options for the things that are used in MultiQC_NGI
@@ -31,7 +31,7 @@ def example_plugin_execution_start():
     if config.kwargs.get('disable_plugin', True):
         return None
 
-    log.info("Running Example MultiQC Plugin v{}".format(config.example_plugin_version))
+    log.info("Running SEGLH MultiQC Plugin v{}".format(config.seglh_plugin_version))
 
     # Add to the main MultiQC config object.
     # User config files have already been loaded at this point

@@ -11,11 +11,11 @@ from setuptools import setup, find_packages
 version = '0.1'
 
 setup(
-    name = 'multiqc_mokaguys_plugin',
+    name = 'seglh_plugin',
     version = version,
     author = 'David Brawand',
     author_email = 'dbrawand@nhs.net',
-    description = "Plugins for SEGLH",
+    description = "Plugin for SEGLH",
     long_description = __doc__,
     keywords = 'bioinformatics',
     url = 'https://github.com/moka-guys/multiqc_plugins',
@@ -28,13 +28,13 @@ setup(
     ],
     entry_points = {
         'multiqc.modules.v1': [
-            'tso500 = seglh.modules.tso500:MultiqcModule',
+            'tso500 = seglh_plugin.modules.tso500:MultiqcModule',
         ],
         'multiqc.cli_options.v1': [
-            'disable_plugin = seglh.cli:disable_plugin'
+            'disable_plugin = seglh_plugin.cli:disable_plugin'
         ],
         'multiqc.hooks.v1': [
-            'execution_start = seglh.custom_code:example_plugin_execution_start'
+            'execution_start = seglh_plugin.custom_code:example_plugin_execution_start'
         ]
     },
     classifiers = [
