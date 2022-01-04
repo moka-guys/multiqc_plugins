@@ -19,7 +19,7 @@ config.seglh_plugin_version = get_distribution("seglh_plugin").version
 
 
 # Add default config options for the things that are used in MultiQC_NGI
-def example_plugin_execution_start():
+def seglh_plugin_execution_start():
     """ Code to execute after the config files and
     command line flags have been parsedself.
 
@@ -39,11 +39,8 @@ def example_plugin_execution_start():
     #   clobbering values that have been customised by users.
 
     # Add to the search patterns used by modules
-    if 'my_example/key_value_pairs' not in config.sp:
-        config.update_dict( config.sp, { 'tso500_metrics/key_value_pairs': { 'fn': 'my_plugin_output.tsv' } } )
-
-    if 'my_example/plot_data' not in config.sp:
-        config.update_dict( config.sp, { 'tso500_metrics/plot_data': { 'fn': 'my_plugin_plotdata.tsv' } } )
+    if 'tso500' not in config.sp:
+        config.update_dict( config.sp, { 'tso500': { 'fn': 'MetricsOutput.tsv' } } )
 
     # Some additional filename cleaning
     config.fn_clean_exts.extend([

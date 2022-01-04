@@ -34,7 +34,7 @@ setup(
             'disable_plugin = seglh_plugin.cli:disable_plugin'
         ],
         'multiqc.hooks.v1': [
-            'execution_start = seglh_plugin.custom_code:example_plugin_execution_start'
+            'execution_start = seglh_plugin.custom_code:seglh_plugin_execution_start'
         ]
     },
     classifiers = [
