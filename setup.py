@@ -8,7 +8,7 @@ For more information about MultiQC, see http://multiqc.info
 
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '1.0.0'
 
 setup(
     name = 'seglh_plugin',

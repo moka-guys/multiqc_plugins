@@ -99,12 +99,10 @@ class MultiqcModule(BaseMultiqcModule):
         )
 
         # Find and load any input files for this module
-        # self.tso500_data = dict() # run based statistics
         self.tso500_data_samples = dict()
         self.tso500_data_limits = dict()
         self.tso500_data_groups = defaultdict(list)
         self.source_files = dict()
-        # self.tso500_reference_ranges = dict()
         for f in self.find_log_files('tso500'):
             self.parse_file(f)
             self.add_data_source(
@@ -154,6 +152,9 @@ class MultiqcModule(BaseMultiqcModule):
             )
 
     def sample_stats_table(self, metrics):
+        '''
+        create a table with the sample statistics
+        '''
         headers = OrderedDict()
         for metric in self.tso500_data_limits.keys():
             if metric in metrics:
@@ -226,7 +227,13 @@ class MultiqcModule(BaseMultiqcModule):
 
 
     def parse_file(self, f):
-        '''Parses the Metrics output file'''
+        '''Parses the Metrics output file
+        input:
+            f: file handle
+        output:
+            None
+        
+        '''
         group, sample_names = '', []
         for line in f['f'].splitlines():
             m = re.match(r'^\[(.*)\]\s*$', line)
