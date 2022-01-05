@@ -29,6 +29,7 @@ setup(
     entry_points = {
         'multiqc.modules.v1': [
             'tso500 = seglh_plugin.modules.tso500:MultiqcModule',
+            'sompy = seglh_plugin.modules.sompy:MultiqcModule',
         ],
         'multiqc.cli_options.v1': [
             'disable_plugin = seglh_plugin.cli:disable_plugin'
