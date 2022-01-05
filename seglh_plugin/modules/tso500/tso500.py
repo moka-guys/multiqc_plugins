@@ -159,6 +159,7 @@ class MultiqcModule(BaseMultiqcModule):
         for metric in self.tso500_data_limits.keys():
             if metric in metrics:
                 # get metrics definiton template or create from scratch
+                # extract metric name and unit
                 m = re.match(r'^([^\(]+)\(([^\)]+)\)', metric)
                 if m:
                     name = m.group(1).rstrip().replace('PCT_','').replace('_',' ').capitalize()
@@ -236,6 +237,7 @@ class MultiqcModule(BaseMultiqcModule):
         '''
         group, sample_names = '', []
         for line in f['f'].splitlines():
+            # match data block header
             m = re.match(r'^\[(.*)\]\s*$', line)
             if line.startswith('#'):
                 # comment 
@@ -245,15 +247,16 @@ class MultiqcModule(BaseMultiqcModule):
                 group, sample_names = '', []
                 continue
             elif m:
-                # is a group header
+                # is a group header name from matched Regexp
                 group = m.group(1)
             elif group:
                 if group in ['Header']:
                     # global metrics/data
                     pass
                 elif group.startswith('DNA'):
-                    # DNA data line
+                    # DNA data line (header or data)
                     if line.startswith("Metric "):
+                        # is the header line, extract sample names
                         sample_names = line.rstrip().split('\t')[3:]
                         # add sample data dictionaries
                         for s in [ sample for sample in sample_names if sample not in self.tso500_data_samples.keys()]:
