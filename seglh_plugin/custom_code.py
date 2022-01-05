@@ -38,9 +38,15 @@ def seglh_plugin_execution_start():
     #   so we check whether the value is already set. This is to avoid
     #   clobbering values that have been customised by users.
 
-    # Add to the search patterns used by modules
+    # Add to the search patterns used by modules (somehow the YAML search patterns file is not loaded)
     if 'tso500' not in config.sp:
         config.update_dict( config.sp, { 'tso500': { 'fn': 'MetricsOutput.tsv' } } )
+    if 'sompy' not in config.sp:
+        config.update_dict( config.sp, { 'sompy': {
+            'fn': '*.stats.csv',
+            'contents': ',sompyversion,sompycmd',
+            'num_lines': 1
+        } } )
 
     # Some additional filename cleaning
     config.fn_clean_exts.extend([
