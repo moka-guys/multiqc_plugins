@@ -193,7 +193,7 @@ class MultiqcModule(BaseMultiqcModule):
             else:
                 # parse data
                 f = line.rstrip().split('\t')
-                m = re.match(r'([^_]+_\d{2}_[^_]+_\w{2}_[MFU]_[^_]+_Pan\d+(?:_S\d+)?)',f[0])
+                m = re.match(r'^([^_]+_\d{2}_[^_]+_\w{2}_[MFU]_[^_]+_Pan\d+)',f[0])
                 if m:
                     sample = m.group(1)
                     if sample not in self.ed_data_samples:
