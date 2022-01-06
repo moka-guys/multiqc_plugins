@@ -1,4 +1,5 @@
 #!/bin/sh
 
+rm -rf multiqc_*
 python setup.py install
-multiqc test_data
+multiqc -c test_data/multiqc_config.yaml test_data/live
