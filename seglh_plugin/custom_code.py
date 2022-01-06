@@ -47,6 +47,12 @@ def seglh_plugin_execution_start():
             'contents': ',sompyversion,sompycmd',
             'num_lines': 1
         } } )
+    if 'exomedepth' not in config.sp:
+        config.update_dict( config.sp, { 'exomedepth': {
+            'fn': '*readcount.csv',
+            'contents': 'refsamples',
+            'num_lines': 1
+        } } )
 
     # Some additional filename cleaning
     config.fn_clean_exts.extend([
