@@ -247,7 +247,7 @@ class MultiqcModule(BaseMultiqcModule):
                 group, sample_names = '', []
                 continue
             elif m:
-                # is a group header name from matched Regexp
+                # is a group header name from matched Regexp (section name in square brackets => section in MultiQC report)
                 group = m.group(1)
             elif group:
                 if group in ['Header']:
@@ -256,7 +256,7 @@ class MultiqcModule(BaseMultiqcModule):
                 elif group.startswith('DNA'):
                     # DNA data line (header or data)
                     if line.startswith("Metric "):
-                        # is the header line, extract sample names
+                        # is the header line, extract sample names from row
                         sample_names = line.rstrip().split('\t')[3:]
                         # add sample data dictionaries
                         for s in [ sample for sample in sample_names if sample not in self.tso500_data_samples.keys()]:
@@ -268,6 +268,7 @@ class MultiqcModule(BaseMultiqcModule):
                         lsl = float(f[1]) if f[1] != 'NA' else None
                         usl = float(f[2]) if f[2] != 'NA' else None
                         self.tso500_data_limits[metric] = (lsl, usl)
+                        # check metric is in special_groups, else add it in
                         try:
                             self.special_groups[metric]
                         except KeyError:
@@ -278,4 +279,5 @@ class MultiqcModule(BaseMultiqcModule):
                         for i, sample in enumerate(sample_names):
                             self.tso500_data_samples[sample][metric] = float(data[i])
                 else:
-                    pass # unknown group
+                    # unknown group (ignore)
+                    pass
