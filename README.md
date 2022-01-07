@@ -3,6 +3,8 @@ MultiQC modules for custom software and pipeline QC metrics at the SEGLH.
 ## Available modules
 
 - `tso500` for TSO500 metrics output from Illumina's monolithic pipeline
+- `sompy` for som.py benchmarking results (displays recall metrics only as default)
+- `exomedepth` for exomedepth readcount, coorelation and model fitting metrics
 
 ## Development
 
