@@ -29,7 +29,8 @@ def autocast(x):
 class MultiqcModule(BaseMultiqcModule):
     # configures manual metric->group mappings
     sompy_groups = {
-        'records':'SNV Benchmark',
+        'records':'Combined Benchmark',
+        'SNVs': 'SNV Benchmark',
         'indels':'Indel Benchmark'
     } 
 
@@ -64,7 +65,7 @@ class MultiqcModule(BaseMultiqcModule):
 
         # Nothing found - raise a UserWarning to tell MultiQC
         if len(self.sompy_data) == 0:
-            log.debug("Could not find any reports in {}".format(config.analysis_dir))
+            log.debug("Could not find any som.py reports in {}".format(config.analysis_dir))
             raise UserWarning
 
         log.info("Found {} reports".format(len(self.sompy_data)))
@@ -197,6 +198,8 @@ class MultiqcModule(BaseMultiqcModule):
 
     def parse_file(self, f):
         '''Parses the Metrics output file
+        CSV file with header, one row per variant type
+
         input:
             f: file handle
         output:

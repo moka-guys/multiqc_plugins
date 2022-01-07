@@ -117,7 +117,7 @@ class MultiqcModule(BaseMultiqcModule):
 
         # Nothing found - raise a UserWarning to tell MultiQC
         if len(self.tso500_data_samples) == 0:
-            log.debug("Could not find any reports in {}".format(config.analysis_dir))
+            log.debug("Could not find any TSO500 reports in {}".format(config.analysis_dir))
             raise UserWarning
 
         log.info("Found {} reports".format(len(self.tso500_data_samples)))

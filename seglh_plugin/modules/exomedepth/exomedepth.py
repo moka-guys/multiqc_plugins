@@ -121,7 +121,7 @@ class MultiqcModule(BaseMultiqcModule):
 
         # Nothing found - raise a UserWarning to tell MultiQC
         if len(self.ed_data_samples) == 0:
-            log.debug("Could not find any reports in {}".format(config.analysis_dir))
+            log.debug("Could not find any Exomedepth reports in {}".format(config.analysis_dir))
             raise UserWarning
 
         log.info("Found {} reports".format(len(self.ed_data_samples)))
@@ -136,7 +136,6 @@ class MultiqcModule(BaseMultiqcModule):
             description="ExomeDepth metrics for each sample",
             plot=self.sample_stats_table(),
         )
-        # batch plots ()
 
     def sample_stats_table(self):
         '''
@@ -173,6 +172,8 @@ class MultiqcModule(BaseMultiqcModule):
 
     def parse_file(self, f):
         '''Parses the Metrics output file
+	CSV file from ReadCount step that contains a header and 1 row per sample
+
         input:
             f: file handle
         output:
