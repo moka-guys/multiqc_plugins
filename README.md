@@ -26,8 +26,8 @@ http://multiqc.info/docs/#coding-with-multiqc
 * `seglh_plugin/custom_code.py`
     * File to hold custom functions that can tie into the main MultiQC execution flow.
     * In this file, we define some new config defaults, including the search patterns used by the example module
-* `seglh_plugin/modules/my_example/`
-    * This folder contains a minimal MultiQC module which will execute along with all other MultiQC modules (as defined by the `setup.py` hook).
+* `seglh_plugin/modules/modulename/`
+    * This folder contains a MultiQC module which will execute along with all other MultiQC modules (as defined by the `setup.py` hook).
 
 ### Usage
 
@@ -39,6 +39,10 @@ python setup.py install
 ```
 
 Use `python setup.py develop` if you're actively working on the code - then you don't need to rerun the installation every time you make an edit _(though you still do if you change anything in `setup.py`)_.
+
+### Docker
+
+To build the docker image simply run the `build.sh` script. It will create an image with the correct version tag (e.g. `seglh/multiqc:v1.11`).
 
 ### Disabling the plugin
 
