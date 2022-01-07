@@ -1,0 +1,11 @@
+# Search patterns are coded in the custom code. The patterns below are just for reference
+tso500:
+  fn: "MetricsOutput.tsv"
+sompy:
+  fn: ".stats.csv"
+  contents: ",sompyversion,sompycmd"
+  num_lines: 1
+exomedepth:
+  fn: "*readcount.csv"
+  contents: "refsamples"
+  num_lines: 1
