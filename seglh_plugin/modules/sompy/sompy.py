@@ -81,12 +81,15 @@ class MultiqcModule(BaseMultiqcModule):
 
         # create the result table
         for group in sorted(self.sompy_groups.keys()):
-            self.add_section(
-                name=self.sompy_groups[group],
-                anchor="sompy-bysample",
-                description="",
-                plot=self.sample_stats_table(group),
-            )
+            plot = self.sample_stats_table(group)
+            if plot:
+                self.add_section(
+                    name=self.sompy_groups[group],
+                    anchor="sompy-bysample",
+                    description="",
+                    plot=plot,
+                )
+
 
     def sample_stats_table(self, group):
         '''
@@ -191,9 +194,12 @@ class MultiqcModule(BaseMultiqcModule):
         }
         group_data = dict()
         for sample in self.sompy_data:
-            group_data[sample] = self.sompy_data[sample][group]
-
-        return table.plot(group_data, h, table_config)
+            try:
+                group_data[sample] = self.sompy_data[sample][group]
+            except KeyError:
+                pass
+        
+        return table.plot(group_data, h, table_config) if group_data else None
 
 
     def parse_file(self, f):
