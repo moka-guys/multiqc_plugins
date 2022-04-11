@@ -277,7 +277,11 @@ class MultiqcModule(BaseMultiqcModule):
                             self.tso500_data_groups[self.special_groups[metric]].append(metric)
                         data = f[3:]
                         for i, sample in enumerate(sample_names):
-                            self.tso500_data_samples[sample][metric] = float(data[i])
+                            try:
+                                self.tso500_data_samples[sample][metric] = float(data[i])
+                            except ValueError:
+                                self.tso500_data_samples[sample][metric] = None
+
                 else:
                     # unknown group (ignore)
                     pass

@@ -6,6 +6,6 @@ sompy:
   contents: ",sompyversion,sompycmd"
   num_lines: 1
 exomedepth:
-  fn: "*readcount.csv"
+  fn: "*_readCount.csv"
   contents: "refsamples"
   num_lines: 1

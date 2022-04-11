@@ -49,7 +49,7 @@ def seglh_plugin_execution_start():
         } } )
     if 'exomedepth' not in config.sp:
         config.update_dict( config.sp, { 'exomedepth': {
-            'fn': '*readcount.csv',
+            'fn': '*_readCount.csv',
             'contents': 'refsamples',
             'num_lines': 1
         } } )
