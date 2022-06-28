@@ -228,6 +228,14 @@ class MultiqcModule(BaseMultiqcModule):
                     m = re.match(r'([^_]+_\d{2}_[^_]+_\w{2}_[MFU]_[^_]+_Pan\d+(?:_S\d+)?)',result_file_root)
                     if m:
                         sample_name = m.group(1)
+
+                # if this specific regex match doesn't happen, then the
+                # output filename can be used
+                if sample_name is None:
+                    m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
+                    out = m.group(1)
+                    sample_name = out.split("/")[-1]
+
                 # add to data dictionary
                 if sample_name is not None:
                     self.sompy_data[sample_name][group] = data
