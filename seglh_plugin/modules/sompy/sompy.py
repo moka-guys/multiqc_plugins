@@ -223,8 +223,10 @@ class MultiqcModule(BaseMultiqcModule):
                 # get sample identifier from output name
                 sample_name = None
                 m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                sample_name = os.path.basename(m.group(1))
-
-                # add to data dictionary
-                if sample_name is not None:
+                if m:
+                    sample_name = os.path.basename(m.group(1))
+                    # add to data dictionary
                     self.sompy_data[sample_name][group] = data
+                else:
+                    log.debug("Could not find string -o in sompy stats.csv file")
+                    raise UserWarning
