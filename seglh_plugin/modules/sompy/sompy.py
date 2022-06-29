@@ -223,18 +223,7 @@ class MultiqcModule(BaseMultiqcModule):
                 # get sample identifier from output name
                 sample_name = None
                 m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                if m:
-                    result_file_root = os.path.basename(m.group(1))
-                    m = re.match(r'([^_]+_\d{2}_[^_]+_\w{2}_[MFU]_[^_]+_Pan\d+(?:_S\d+)?)',result_file_root)
-                    if m:
-                        sample_name = m.group(1)
-
-                # if this specific regex match doesn't happen, then the
-                # output filename can be used
-                if sample_name is None:
-                    m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                    out = m.group(1)
-                    sample_name = out.split("/")[-1]
+                sample_name = os.path.basename(m.group(1))
 
                 # add to data dictionary
                 if sample_name is not None:
