@@ -222,9 +222,9 @@ class MultiqcModule(BaseMultiqcModule):
                 data = dict(zip(header[2:], fields[2:]))
                 # get sample identifier from output name
                 sample_name = None
-                m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                if m:
-                    sample_name = os.path.basename(m.group(1))
+                outfile = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
+                if outfile:
+                    sample_name = os.path.basename(outfile.group(1))
                     # add to data dictionary
                     self.sompy_data[sample_name][group] = data
                 else:
