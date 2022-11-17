@@ -9,3 +9,7 @@ exomedepth:
   fn: "*readcount.csv"
   contents: "refsamples"
   num_lines: 1
+sambamba_chanjo:
+  fn: "*gene_level.txt"
+  contents: "percent_bases_covered"
+  num_lines: 1
