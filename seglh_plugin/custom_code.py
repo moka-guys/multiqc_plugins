@@ -53,6 +53,12 @@ def seglh_plugin_execution_start():
             'contents': 'refsamples',
             'num_lines': 1
         } } )
+    if 'sambamba_chanjo' not in config.sp:
+        config.update_dict( config.sp, { 'sambamba_chanjo': {
+            'fn': '*gene_level.txt',
+            'contents': 'percent_bases_covered',
+            'num_lines': 1
+        } } )
 
     # Some additional filename cleaning
     config.fn_clean_exts.extend([
