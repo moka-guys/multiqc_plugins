@@ -1,6 +1,7 @@
 FROM python:3.9
 
 ARG MULTIQC_VERSION=v1.13
+ARG MULTIQC_PLUGIN_VERSION=v1.2.0
 
 LABEL author="David Brawand" \
       description="MultiQC ${MULTIQC_VERSION} with SEGLH plugin" \
