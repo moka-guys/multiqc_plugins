@@ -228,12 +228,12 @@ class MultiqcModule(BaseMultiqcModule):
                 data = dict(zip(header[2:], fields[2:]))
                 # get sample identifier from output name
                 sample_name = None
-                m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                if m:
-                    result_file_root = os.path.basename(m.group(1))
-                    m = re.match(r'([^_]+_\d{2}_[^_]+_\w{2}_[MFU]_[^_]+_Pan\d+(?:_S\d+)?)',result_file_root)
-                    if m:
-                        sample_name = m.group(1)
-                # add to data dictionary
-                if sample_name is not None:
+                # from the sompy stats.csv file select the sompycmd column
+                # which contains the input vcf filename after "-o"
+                vcf_name = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
+                if vcf_name:
+                    sample_name = os.path.basename(vcf_name.group(1))
+                    # add to data dictionary
                     self.sompy_data[sample_name][group] = data
+                else:
+                    log.debug("Could not find '-o filename' in sompy stats.csv file")
