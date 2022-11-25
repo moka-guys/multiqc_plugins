@@ -230,9 +230,9 @@ class MultiqcModule(BaseMultiqcModule):
                 sample_name = None
                 # from the sompy stats.csv file select the sompycmd column
                 # which contains the input vcf filename after "-o"
-                m = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
-                if m:
-                    sample_name = os.path.basename(m.group(1))
+                vcf_name = re.search(r'.*-o\s*(\S+)', data['sompycmd'])
+                if vcf_name:
+                    sample_name = os.path.basename(vcf_name.group(1))
                     # add to data dictionary
                     self.sompy_data[sample_name][group] = data
                 else:
