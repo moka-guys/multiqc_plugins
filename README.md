@@ -44,7 +44,7 @@ Use `python setup.py develop` if you're actively working on the code - then you 
 
 ### Docker
 
-To build the docker image simply run the `build.sh` script. It will create an image with the correct version tag (e.g. `seglh/multiqc:v1.11`).
+To build the docker image simply run the `build.sh` script. It will create an image with the correct version of multiqc and tag version for the plugins (e.g. `seglh/multiqc_v1.14:v1.3.0`).
 
 ### Disabling the plugin
 
