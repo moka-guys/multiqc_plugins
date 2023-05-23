@@ -54,11 +54,7 @@ def seglh_plugin_execution_start():
             'num_lines': 1
         } } )
     if 'sambamba_chanjo' not in config.sp:
-        config.update_dict( config.sp, { 'sambamba_chanjo': {
-            'fn': '*.gene_level.txt',
-            'contents': 'gene symbol',
-            'num_lines': 1
-        } } )
+        config.update_dict( config.sp, { 'sambamba_chanjo': { 'fn': '*.gene_level.txt' } } )
 
     # Some additional filename cleaning
     config.fn_clean_exts.extend([
