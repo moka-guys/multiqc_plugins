@@ -5,6 +5,7 @@ MultiQC modules for custom software and pipeline QC metrics at the SEGLH.
 - `tso500` for TSO500 metrics output from Illumina's monolithic pipeline
 - `sompy` for som.py benchmarking results (displays recall metrics only as default)
 - `exomedepth` for exomedepth readcount, coorelation and model fitting metrics
+- `sambamba_chanjo` sambamba gene level coverage data
 
 ## Development
 
@@ -44,7 +45,7 @@ Use `python setup.py develop` if you're actively working on the code - then you 
 
 ### Docker
 
-To build the docker image simply run the `build.sh` script. It will create an image with the correct version of multiqc and tag version for the plugins (e.g. `seglh/multiqc_v1.14:v1.3.0`).
+To build the docker image simply run the `build.sh` script. It will create an image with the correct version of multiqc and tag version for the plugins (e.g. `seglh/multiqc_v1.14:v1.4.0`).
 
 ### Disabling the plugin
 
