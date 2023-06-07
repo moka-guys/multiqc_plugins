@@ -257,7 +257,6 @@ class MultiqcModule(BaseMultiqcModule):
                     if line.startswith("Metric "):
                         # is the header line, extract sample names from row
                         sample_names = line.rstrip().split('\t')[3:]
-                        #print("tso samplenames" + str(sample_names))
                         # add sample data dictionaries
                         for s in [ sample for sample in sample_names if sample not in self.tso500_data_samples.keys()]:
                             self.tso500_data_samples[s] = dict()
