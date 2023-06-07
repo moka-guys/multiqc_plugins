@@ -31,7 +31,7 @@ class MultiqcModule(BaseMultiqcModule):
         
         # Initialise the parent module Class object
         super(MultiqcModule, self).__init__(
-            name = 'sambamba_chanjo metrics',
+            name = 'sambamba_chanjo',
             target = "sambamba_chanjo",
             anchor = 'sambamba_chanjo',
             href = 'https://github.com/moka-guys/multiqc_plugins',
@@ -67,9 +67,9 @@ class MultiqcModule(BaseMultiqcModule):
 
         # create the result table
         self.add_section(
-            name="Sample Statistics",
+            name="Gene Level Coverage",
             anchor="sambamba_chanjo-bysample",
-            description="Coverage metrics for each sample",
+            description="Coverage metrics for each sample based on target assay",
             plot=self.sample_stats_table(),
             )
         
@@ -82,17 +82,9 @@ class MultiqcModule(BaseMultiqcModule):
             for gene in sorted(self.sambamba_chanjo_data_samples[samples]):
                 headers[gene] = {
                 "title": gene,
-                "description": "percentage genes covered at 100x",
+                "description": "percentage genes covered at target coverage",
                 "hidden": False,
-                #highlight any genes with less than 50% coverage
-                "cond_formatting_rules": {
-                    "red": [
-                        {"lt": 50},
-                    ],
-                },
-                "cond_formatting_colours": [
-                    {"red": "#f03b20"},
-                ]
+                'scale': 'BuGn',
             }
         
         # Table config
@@ -114,15 +106,16 @@ class MultiqcModule(BaseMultiqcModule):
         output:
             None
         '''
-        header = []
         for line in f['f'].splitlines():
+            #check if its the correct file
             if line.startswith('gene symbol'):
-            # header
-                header = line.rstrip().split('\t')
+                continue
+            #
             elif line.startswith('#') or len(line) == 0 or re.match(r'^\s+$',line):
                 # comment or empty line (reset)
                 continue
             else:
+                #parse data
                 gene, coverage = line.rstrip().split('\t')
                 self.sambamba_chanjo_data_samples[f['s_name']][gene] = float(coverage)
 
