@@ -226,7 +226,6 @@ class MultiqcModule(BaseMultiqcModule):
 
         return table.plot(self.tso500_data_samples, headers, table_config)
 
-
     def parse_file(self, f):
         '''Parses the Metrics output file
         input:
@@ -281,7 +280,6 @@ class MultiqcModule(BaseMultiqcModule):
                                 self.tso500_data_samples[sample][metric] = float(data[i])
                             except ValueError:
                                 self.tso500_data_samples[sample][metric] = None
-
                 else:
                     # unknown group (ignore)
                     pass
