@@ -31,6 +31,7 @@ setup(
             'tso500 = seglh_plugin.modules.tso500:MultiqcModule',
             'sompy = seglh_plugin.modules.sompy:MultiqcModule',
             'exomedepth = seglh_plugin.modules.exomedepth:MultiqcModule',
+            'sambamba_chanjo = seglh_plugin.modules.sambamba_chanjo:MultiqcModule',
         ],
         'multiqc.cli_options.v1': [
             'disable_plugin = seglh_plugin.cli:disable_plugin'

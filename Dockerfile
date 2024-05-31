@@ -1,6 +1,7 @@
 FROM python:3.9
 
-ARG MULTIQC_VERSION=v1.11
+ARG MULTIQC_VERSION=v1.14
+ARG MULTIQC_PLUGIN_VERSION=v1.4.0
 
 LABEL author="David Brawand" \
       description="MultiQC ${MULTIQC_VERSION} with SEGLH plugin" \
@@ -17,7 +18,7 @@ COPY . multiqc_plugins
 RUN cd multiqc_plugins && \
     python setup.py install
 
-# uncomment this is the dockerfile is distributed outside of this repository 
+# uncomment this if the dockerfile is distributed outside of this repository 
 #RUN git clone https://github.com/moka-guys/multiqc_plugins.git --branch main && \
 #    cd multiqc_plugins && \
 #    python setup.py install
