@@ -1,0 +1,2 @@
+from __future__ import absolute_import
+from .Bases2Fastq_Import import MultiqcModule

@@ -1,13 +1,25 @@
-venv: venv/touchfile
+BUILD := $(shell git describe --tags --always --dirty)
+DIR := $(shell pwd)
 
-venv/touchfile: requirements.txt
-	test -d venv || python3 -m venv venv
-	. venv/bin/activate; pip install -Ur requirements.txt
-	touch venv/touchfile
+# Define image names
+APP      := multiqc_plugins
+REGISTRY := seglh
 
-test: venv
-	. venv/bin/activate; nosetests project/test
+# Build tags
+IMG           := $(REGISTRY)/$(APP)
+IMG_VERSIONED := $(IMG):$(BUILD)
+IMG_LATEST    := $(IMG):latest
 
-clean:
-	rm -rf venv
-	find -iname "*.pyc" -delete
+.PHONY: push build version cleanbuild
+
+push: build
+	docker push $(IMG_VERSIONED)
+	docker push $(IMG_LATEST)
+
+build: version
+	docker buildx build --platform linux/amd64 -t $(IMG_VERSIONED) . || docker build -t $(IMG_VERSIONED) .
+	docker tag $(IMG_VERSIONED) $(IMG_LATEST)
+	docker save $(IMG_VERSIONED) | gzip > $(DIR)/$(REGISTRY)-$(APP):$(BUILD).tar.gz
+
+cleanbuild:
+	docker buildx build --platform linux/amd64 --no-cache -t $(IMG_VERSIONED) .

@@ -1,22 +1,27 @@
-FROM python:3.9
+FROM python:3.12
 
-ARG MULTIQC_VERSION=v1.14
-ARG MULTIQC_PLUGIN_VERSION=v1.4.0
+RUN pip install setuptools
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-LABEL author="David Brawand" \
+
+ARG MULTIQC_VERSION=multiqctest
+ARG MULTIQC_PLUGIN_VERSION=v2.0.0
+
+LABEL author="SEGLH GSTT Bioinformatics Team" \
       description="MultiQC ${MULTIQC_VERSION} with SEGLH plugin" \
-      maintainer="dbrawand@nhs.net"
+      maintainer="gstt.mokaguys@nhs.net"
 
 # Install MultiQC
-RUN git clone https://github.com/ewels/MultiQC.git --branch ${MULTIQC_VERSION} && \
+RUN git clone https://github.com/millardkieron/MultiQC.git --branch ${MULTIQC_VERSION} && \
     cd MultiQC && \
-    git checkout  && \
-    python setup.py install
+    pip install .
 
 # Add plugin and install
 COPY . multiqc_plugins
 RUN cd multiqc_plugins && \
-    python setup.py install
+    pip install .
+
 
 # uncomment this if the dockerfile is distributed outside of this repository 
 #RUN git clone https://github.com/moka-guys/multiqc_plugins.git --branch main && \

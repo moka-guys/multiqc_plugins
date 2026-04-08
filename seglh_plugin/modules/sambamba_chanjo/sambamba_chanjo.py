@@ -8,8 +8,8 @@ import logging
 import os
 import re
 from multiqc import config
-from multiqc.plots import table
-from multiqc.modules.base_module import BaseMultiqcModule
+from multiqc.plots  import table
+from multiqc.base_module import BaseMultiqcModule
 
 # Initialise the main MultiQC logger
 log = logging.getLogger('multiqc')
@@ -45,12 +45,13 @@ class MultiqcModule(BaseMultiqcModule):
         for f in self.find_log_files('sambamba_chanjo'):
             self.sambamba_chanjo_data_samples[f['s_name']]= {}
             self.parse_file(f)
-            self.add_data_source(
-                s_name=f['s_name'],
-                source=os.path.join(f['root'],f['fn']),
-                module="sambamba_chanjo",
-                section="sambamba_chanjo-bysample",
-            )
+            #self.add_data_source(
+            #    s_name=f['s_name'],
+            #    source=os.path.join(f['root'],f['fn']),
+            #    module="sambamba_chanjo",
+            #    section="sambamba_chanjo-bysample",
+            #)
+            self.add_data_source(f, f['s_name'])
 
         # Filter out samples matching ignored sample names
         self.sambamba_chanjo_data_samples = self.ignore_samples(self.sambamba_chanjo_data_samples)

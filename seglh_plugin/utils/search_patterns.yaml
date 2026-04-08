@@ -1,13 +1,10 @@
-# Search patterns are coded in the custom code. The patterns below are just for reference
-tso500:
-  fn: "MetricsOutput.tsv"
-sompy:
-  fn: ".stats.csv"
-  contents: ",sompyversion,sompycmd"
-  num_lines: 1
-exomedepth:
-  fn: "*_readCount.csv"
-  contents: "refsamples"
-  num_lines: 1
 sambamba_chanjo:
   fn: "*.gene_level.txt"
+Bases2Fastq_Import/run:
+  fn: 'RunStats.json'
+  contents: 'SampleStats' 
+  num_lines: 100
+Bases2Fastq_Import/project:
+  fn: '*_RunStats.json'
+  contents: 'SampleStats'
+  num_lines : 100

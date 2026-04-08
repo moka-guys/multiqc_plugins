@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-Example plugin for MultiQC, showing how to structure code
-and plugin hooks to work effectively with the main MultiQC code.
+Setup Script to import all entry points for custom modules 
+needed for GSTT Specific QC checks
 
 For more information about MultiQC, see http://multiqc.info
 """
@@ -13,9 +13,9 @@ version = '1.0.0'
 setup(
     name = 'seglh_plugin',
     version = version,
-    author = 'David Brawand',
-    author_email = 'dbrawand@nhs.net',
-    description = "Plugin for SEGLH",
+    author = 'SE GLH GSTT Bioinformatics Team',
+    author_email = 'gsttbioinformatics@synnovis.co.uk',
+    description = "Plugin for GSTT SEGLH",
     long_description = __doc__,
     keywords = 'bioinformatics',
     url = 'https://github.com/moka-guys/multiqc_plugins',
@@ -28,10 +28,8 @@ setup(
     ],
     entry_points = {
         'multiqc.modules.v1': [
-            'tso500 = seglh_plugin.modules.tso500:MultiqcModule',
-            'sompy = seglh_plugin.modules.sompy:MultiqcModule',
-            'exomedepth = seglh_plugin.modules.exomedepth:MultiqcModule',
             'sambamba_chanjo = seglh_plugin.modules.sambamba_chanjo:MultiqcModule',
+            'Bases2Fastq_Import = seglh_plugin.modules.Bases2Fastq_Import:MultiqcModule',
         ],
         'multiqc.cli_options.v1': [
             'disable_plugin = seglh_plugin.cli:disable_plugin'
